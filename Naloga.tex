@@ -5,7 +5,7 @@
     a4paper, 
     margin=2.5cm]{geometry}
 \usepackage[utf8]{inputenc}         % UTF8 enkodiranje
-\usepackage[slovene]{babel}          % Slovenščina
+\usepackage[slovene]{babel}         % Slovenščina
 \usepackage[
     pdfusetitle, 
     hidelinks, 
@@ -55,7 +55,7 @@
 
 \newdateformat{MMYYYYdate}{\monthname[\THEMONTH] \THEYEAR}
 
-\title{Naslov naloge}
+\title{Obrestni račun}
 \author{Jaka Kovač, G 4. b}
 
 \begin{document}
@@ -68,16 +68,16 @@
     \textbf{Vegova ulica 4, 1000 Ljubljana}
 
     \vspace{\fill} 
-    Seminarska naloga pri predmetu predmet
+    Seminarska naloga pri predmetu matematika
 
-    \Huge{\textbf{Naslov naloge}}
+    \Huge{\textbf{Obrestni račun}}
 
     \normalsize
     \vspace{\fill}
 
-    Mentor: Mentor Priimek, prof. \hfill Avtor: Jaka Kovač, G 4. b\\
+    Mentor: Karin Kastelic, prof. mat., spec. \hfill Avtor: Jaka Kovač, G 4. b\\
     \null
-    Ljubljana, mesec leto – \MMYYYYdate\today %zamenjaj <mesec in leto> z mesecem in letom začetka
+    Ljubljana, oktober 2023 – \MMYYYYdate\today 
 \end{center}
 \newpage
 \thispagestyle{empty}
@@ -85,15 +85,15 @@
 \newpage
 
 \section*{Povzetek}
-V tej seminarski nalogi bom predstavil kako uporabiti \LaTeX{} za pisanje seminarske naloge.
+V tej seminarski nalogi bom predstavil obrestni rečun in njegove vrste ter primere uporabe.
 \\ %prazna vrstica
-\textbf{Ključe besede:} \LaTeX{}, seminarska naloga, \LaTeX{} predloga
+\textbf{Ključe besede:} obrestni račun, obrestna mera, anuiteta, amortizacijski načrt
 
 \vfill
 \section*{Abstract}
-\foreignlanguage{english}{This paper describes how to use \LaTeX{} to write a paper.
+\foreignlanguage{english}{This paper describes mathematics behind interest rates and their usecases.
 \\ %prazna vrstica
-\textbf{Keywords:} \LaTeX{}, paper, \LaTeX{} template}
+\textbf{Keywords:} interest rate, annuity, amortization schedule}
 \vfill
 
 % KAZALO 
@@ -101,102 +101,77 @@ V tej seminarski nalogi bom predstavil kako uporabiti \LaTeX{} za pisanje semina
 \thispagestyle{empty} % ne številčimo strani
 \tableofcontents % kazalo
 
-\begingroup     % kazalo slik
-\makeatletter
-\section*{Slike}
-\@starttoc{lof}
-\let\clearpage\relax
-\makeatother
-\endgroup
+% \begingroup     % kazalo slik
+% \makeatletter
+% \section*{Slike}
+% \@starttoc{lof}
+% \let\clearpage\relax
+% \makeatother
+% \endgroup
 
 
 \newpage
 \section{Uvod}
-Orodje \LaTeX mi je zelo všeč zato sem se odločil, da bom napisal seminarsko nalogo v njem.
-Primer seminarske naloge napisane v \LaTeX-u najdeš na https://github.com/insightfulbriyan/Komunkacijska-vezja-in-naprave.
+Že od nekdaj so ljudje med seboj trgovali. Včasih so med sabo menjali dobrine (naturalno gospodarstvo),
+ko pa so okoli leta 3000 pr. n. št. v Mezopotamiji \cite{wiki:money} pričeli z menjavo izdelov za denar.
+Izumu denarja so botrovale tudi banke. Posojanje denarja v zameno za več denarja se sprva zdi precej
+nenavadno, vendar pa je to le ena izmed storitev modernejšega sveta. 
 
-\section{Namestitev \LaTeX-a}
-    \subsection{Linux}
-    Ustvarimo si mapo v katero bomo namestili \LaTeX{} in se v njo premaknemo. Najbolje je da to storiš v /home/username/Downloads.
-    \begin{lstlisting}[language=bash]
-        mkdir latex
 
-        cd latex
-    \end{lstlisting}
 
-    Nato si prenesemo namestitveni paket iz https://www.tug.org/texlive/acquire-netinstall.html in ga razpakiramo.
-    \begin{lstlisting}[language=bash]
-        wget https://mirror.ctan.org/systems/
-        texlive/tlnet/install-tl-unx.tar.gz
-
-        tar -xzf install-tl-unx.tar.gz
-
-        cd install-tl-*
-    \end{lstlisting}
-
-    Kot sudo zašemeno namestitveno skripto. Bodi pripravljen, popolna namestitev lahko traja nekaj ur. 
-    \begin{lstlisting}[language=bash]
-        sudo ./install-tl
-    \end{lstlisting}
-    POZOR:
-    Predlagam, da namestiš vse pakete. Če veš, da nekaterih ne boš potreboval potem lahko prihraniš nekaj časa (zanemarljiv malo, glede na izkušnje)
-
-    \subsection{Windows}
-    IDK, vprašaj koga drugega. Prosim dopolni to poglavje.
-
-    \subsection{MacOS}
-    IDK, vprašaj koga drugega. Prosim dopolni to poglavje.
-
-\newpage
-\section{Uporaba \LaTeX-a}
-    Spletni vodič: https://www.overleaf.com/learn/latex/Learn\_LaTeX\_in\_30\_minutes
-    \begin{verbatim}
-        \section{Naslov poglavja}
-        \subsection{Naslov podpoglavja}
-        \subsubsection{Naslov podpodpoglavja}
-        \paragraph{Naslov odstavka (podpodpodpoglavja)}
-        \subparagraph{Naslov pododstavka}
-    \end{verbatim}
-
-    Uporbni vodič za pisanje tehničnih besedil: http://lie.fe.uni-lj.si/Napotki\_TehnicnaBesedila.pdf \\
-    dodatno pozornost posveti prvi in drugi strani ter obkroženim delom. \\
-    p.s.: Vodič vsebuje tudi pogoste slovnične napake (od vključno napotka 36 dalje)
-    \subsection{Slike}
-    \begin{verbatim}
-        \begin{figure}[h]
+\section{Teorija}
+    \subsection{Pojmi, definicije in uporabljeni simboli}
+        \begin{table}[h!]
             \centering
-            \includegraphics[scale=0.5]{slike/vegova\_logo.png}
-            \caption{Vegova logo}
-            \label{fig:vegova\_logo}
-        \end{figure}
-    \end{verbatim}
+            \begin{tabular}{|c|c|p{9cm}|}
+                \hline
+                \textbf{simbol} & \textbf{pojem} & \textbf{definicija} \\ \hline
+                $G_0$ & glavnica & denarna vrednost, ki si jo od nekoga izposodimo ali jo mi posodimo nekomu \\ \hline 
+                $o$ & obresti & nadomestilo ali odškodnina za izposojeni denar, ker le-ta v času obrestovanja ni na voljo lastniku \\ \hline
+                $p$ & obrestna mera & obresti podane v odstodkih navadno \textbf{letna obrestna mera} \\ \hline
+                $p_k$ & konformna obrestna mera & obrestna mera, ki se uporablja za izračun obresti \\ \hline
+                $r$ & obrestovalni faktor & $$r = 1 + \frac{p}{100}$$ \\ \hline
+                $r_k$ & konformni obrestovalni faktor & $$r_k = 1 + \frac{p_k}{100}$$ \\ \hline
+                $k$ & kapitalizaijska obdobja & \\ \hline
+                $c$ & anuiteta & redno odplačilo \\ \hline
+            \end{tabular}
 
-    \subsection{Formule}
-    https://www.cmor-faculty.rice.edu/~heinken/latex/symbols.pdf
-    \begin{equation}
-        E = mc^2
-    \end{equation}
-    $$\frac{1}{2}$$
-    $$\sqrt{2}$$
-    \begin{equation}
-        \frac{a}{b} = \frac{c}{d} \Rightarrow a*d = b*d
-    \end{equation}
+            \medskip
+            \centering povteto po \cite{vega4}
+            \caption{Simboli, pojmi in njihove definicije}
+            \label{tab:simboli}
+        \end{table}
+    \subsection{Obrestovanje}
+        \subsubsection{Navadno obrestovanje}
+        Navadno obrestovanje je način obrestovanja, kjer so obresti odvisne le od glavnice in obrestne mere,
+        ne pa tudi od prejšnjih obresti. Končna vrednost glavnice po $n$ letih se izračuna po formuli:
+        \begin{equation}
+            G_n = G_0 \cdot (1 + \frac{p*n}{100})
+        \end{equation}
 
-    Enačbe in formule naj bodo obdane z equation wrapperjem, izrazi načeloma ne potrebujejo.
-    Posvetuj se s povesorjem, ki bo ocenjeval seminarsko nalogo. Izrazi izven wrapperja morajo biti obdani z \$\$.
+        \newpage
+        Vzemimo primer, kjer na banko položimo 10 000 € za 5 let pri 5\% letni obrestni meri. 
+        \footnote{Ničto leto označuje polog denarja}
+        \begin{center}
+            
+            \begin{tabular}{|c|c|}
+                \hline
+                \textbf{leto} & \textbf{vrednost} \\ \hline
+                0 & 10 000 € \\ \hline
+                1 & 10 500 € \\ \hline
+                2 & 11 000 € \\ \hline
+                3 & 11 500 € \\ \hline
+                4 & 12 000 € \\ \hline
+                5 & 12 500 € \\ \hline
+                
+            \end{tabular}
+        \end{center}
+        \subsubsection{Obrestno obrestovanje}
+
+\section{Rešen primer}
+\section{Avtentični primer}
 
 
-\newpage
-\section{BibTeX}
-    \subsection{Izvoz iz COBISS-a}
-    COBISS podpira izvažanje citiranja v format BibTeX. To opcijo izkoristi.
-    Tudi Google Scholar podpira izvoz v BibTeX formatu.
-    \subsection{Izvoz iz spletnega pomočnika}
-    Predlagam: https://boberle.com/projects/bibtex-entry-generator/online/
-    Lahko uporabiš tudi JabRef (https://www.jabref.org/), ki je podprt na vseh namiznih opeacijskih sistemih.
-    \subsection{Samostojo pisanje}
-    Spletni vodič za začetek: https://www.overleaf.com/learn/latex/Bibliography\_management\_with\_bibtex
-    Drugače pa uporabi Google.
 
 
 
@@ -219,7 +194,7 @@ Primer seminarske naloge napisane v \LaTeX-u najdeš na https://github.com/insig
 
     \vfill
     
-    \today \hfill Jaka Kovač
+    \today \hfill Jaka Kovač, G 4. b
     
     \vspace{3 cm}
 \end{samepage}
