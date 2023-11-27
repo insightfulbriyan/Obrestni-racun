@@ -22,10 +22,12 @@
 \usepackage{tikz} 
 \usepackage[european]{circuitikz}   % Električna vezja
 \usepackage{datetime}               % Datum
+\usepackage{siunitx}                % tabele
 % \usepackage[slovenian]{csquotes}
 \usepackage{braket}
-\usepackage{amsmath} % matematika ki izgleda lepo
-\usepackage{amsfonts} % množice
+\usepackage{amsmath}                % matematika ki izgleda lepo
+\usepackage{amsfonts}               % množice
+\usepackage{longtable}              % več vrstic v tabeli
 \usepackage[style=ieee, maxbibnames=3, minbibnames=1, 
     maxcitenames=1, mincitenames=1, sorting=nyt]{biblatex}   % Navajanje virov
 \bibliography{viri}
@@ -91,7 +93,8 @@ V tej seminarski nalogi bom predstavil obrestni rečun in njegove vrste ter prim
 
 \vfill
 \section*{Abstract}
-\foreignlanguage{english}{This paper describes mathematics behind interest rates and their usecases.
+\foreignlanguage{english}{This paper describes mathematics behind interest rates and their
+usecases.
 \\ %prazna vrstica
 \textbf{Keywords:} interest rate, annuity, amortization schedule}
 \vfill
@@ -112,28 +115,27 @@ V tej seminarski nalogi bom predstavil obrestni rečun in njegove vrste ter prim
 
 \newpage
 \section{Uvod}
-Že od nekdaj so ljudje med seboj trgovali. Včasih so med sabo menjali dobrine (naturalno gospodarstvo),
-ko pa so okoli leta 3000 pr. n. št. v Mezopotamiji \cite{wiki:money} pričeli z menjavo izdelov za denar.
-Izumu denarja so botrovale tudi banke. Posojanje denarja v zameno za več denarja se sprva zdi precej
-nenavadno, vendar pa je to le ena izmed storitev modernejšega sveta. 
-
-
+Že od nekdaj so ljudje med seboj trgovali. Včasih so med sabo menjali dobrine (naturalno 
+gospodarstvo), ko pa so okoli leta 3000 pr. n. št. v Mezopotamiji \cite{wiki:money} pričeli
+z menjavo izdelov za denar. Izumu denarja so botrovale tudi banke. Posojanje denarja v 
+zameno za več denarja se sprva zdi precej nenavadno, vendar pa je to le ena izmed storitev
+modernejšega sveta. 
 
 \section{Teorija}
     \subsection{Pojmi, definicije in uporabljeni simboli}
         \begin{table}[h!]
             \centering
-            \begin{tabular}{|c|c|p{9cm}|}
+            \begin{tabular}{|c|c|c|p{7cm}|}
                 \hline
-                \textbf{simbol} & \textbf{pojem} & \textbf{definicija} \\ \hline
-                $G_0$ & glavnica & denarna vrednost, ki si jo od nekoga izposodimo ali jo mi posodimo nekomu \\ \hline 
-                $o$ & obresti & nadomestilo ali odškodnina za izposojeni denar, ker le-ta v času obrestovanja ni na voljo lastniku \\ \hline
-                $p$ & obrestna mera & obresti podane v odstodkih navadno \textbf{letna obrestna mera} \\ \hline
-                $p_k$ & konformna obrestna mera & obrestna mera, ki se uporablja za izračun obresti \\ \hline
-                $r$ & obrestovalni faktor & $$r = 1 + \frac{p}{100}$$ \\ \hline
-                $r_k$ & konformni obrestovalni faktor & $$r_k = 1 + \frac{p_k}{100}$$ \\ \hline
-                $k$ & kapitalizaijska obdobja & \\ \hline
-                $c$ & anuiteta & redno odplačilo \\ \hline
+                \textbf{simbol} & \textbf{pojem} & \textbf{enota} & \textbf{definicija} \\ \hline
+                $G_0$ & glavnica                & EUR    & denarna vrednost, ki si jo od nekoga izposodimo ali jo mi posodimo nekomu \\ \hline 
+                $o$   & obresti                 & EUR    & nadomestilo ali odškodnina za izposojeni denar, ker le-ta v času obrestovanja ni na voljo lastniku \\ \hline
+                $p$   & obrestna mera           & \%     & obresti podane v odstodkih navadno \textbf{letna obrestna mera} \\ \hline
+                $p_k$ & konformna obrestna mera & \%     & obrestna mera, ki se uporablja za izračun obresti \\ \hline
+                $r$   & obrestovalni faktor     &        & $$r = 1 + \frac{p}{100}$$ \\ \hline
+                $r_k$ & konformni obrestovalni faktor &  & $$r_k = 1 + \frac{p_k}{100}$$ \\ \hline
+                $k$   & število kapitalizacijskih odbobji &  & kolikokrat smo izračunali obresti \\ \hline
+                $c$   & anuiteta                & EUR    & redno odplačilo \\ \hline
             \end{tabular}
 
             \medskip
@@ -141,34 +143,141 @@ nenavadno, vendar pa je to le ena izmed storitev modernejšega sveta.
             \caption{Simboli, pojmi in njihove definicije}
             \label{tab:simboli}
         \end{table}
+
+        \subsubsection{Prikazovanje podatkov v tabelah in izračunih}
+        Zaradi preprostosti prikazavanja so v tabeli vrednosti zaokrožene na cente natačno
+        in prikazane v EUR. V izračunih se uporablja dejanska vrednost. Ničto leto označuje
+        polog denarja, prikazane vrednosti pa stanje ob koncu leta razen kjer je navedeno 
+        drugače. 
     \subsection{Obrestovanje}
         \subsubsection{Navadno obrestovanje}
-        Navadno obrestovanje je način obrestovanja, kjer so obresti odvisne le od glavnice in obrestne mere,
-        ne pa tudi od prejšnjih obresti. Končna vrednost glavnice po $n$ letih se izračuna po formuli:
+        Navadno obrestovanje je način obrestovanja, kjer so obresti odvisne le od glavnice
+        in obrestne mere, ne pa tudi od prejšnjih obresti. Končna vrednost glavnice po $n$
+        letih se izračuna po formuli:
         \begin{equation}
             G_n = G_0 \cdot (1 + \frac{p*n}{100})
         \end{equation}
 
-        \newpage
         Vzemimo primer, kjer na banko položimo 10 000 € za 5 let pri 5\% letni obrestni meri. 
-        \footnote{Ničto leto označuje polog denarja}
         \begin{center}
             
             \begin{tabular}{|c|c|}
                 \hline
-                \textbf{leto} & \textbf{vrednost} \\ \hline
-                0 & 10 000 € \\ \hline
-                1 & 10 500 € \\ \hline
-                2 & 11 000 € \\ \hline
-                3 & 11 500 € \\ \hline
-                4 & 12 000 € \\ \hline
-                5 & 12 500 € \\ \hline
-                
+                \textbf{leto} & \textbf{vrednost [EUR]} \\ \hline
+                0 & 10 000,00 \\ \hline
+                1 & 10 500,00 \\ \hline
+                2 & 11 000,00 \\ \hline
+                3 & 11 500,00 \\ \hline
+                4 & 12 000,00 \\ \hline
+                5 & 12 500,00 \\ \hline
             \end{tabular}
         \end{center}
-        \subsubsection{Obrestno obrestovanje}
 
-\section{Rešen primer}
+        \subsubsection{Obrestno obrestovanje}
+        Obrestno obrestovanje je način obrestovanja, kjer so obresti odvisne tako od 
+        glavnice, obrestne mere in prejšnjih obresti. Vsota glavnice in obresti torej 
+        postne glavnica za naslednje kapitalizacijsko obdobje. Končna vrednost glavnice 
+        po $n$ letih se izračuna po formuli:
+        \begin{equation}
+            G_n = G_0 \cdot r^n
+        \end{equation}
+
+        Obrestovalni faktor $r$ izračunamo po formuli:
+        \begin{equation}
+            r = 1 + \frac{p}{100}
+        \end{equation}
+        
+        Enotna formula za izrčun vrdnosti glavnice:
+        \begin{equation}
+            G_n = G_0 \cdot (1 + \frac{p}{100})^n
+        \end{equation}
+
+
+        Za primer vzemimo enake podatke kot pri navadnem obrestovanju.
+        \begin{center}
+            \begin{tabular}{|c|S|S|S|}
+                \hline
+                \textbf{leto} & \textbf{letne obresti [EUR]} & \textbf{skupne obresti [EUR]} & \textbf{vrednost [EUR]} \\ \hline
+                0 & 0,00 & 0,00 & 10 000,00 \\ \hline
+                1 & 500,00 & 500,00 & 10 500,00 \\ \hline
+                2 & 525,00 & 1 025,00 & 11 025,00 \\ \hline
+                3 & 551,25 & 1 576,25 & 11 576,25 \\ \hline
+                4 & 578,81 & 2 155,06 & 12 155,06 \\ \hline
+                5 & 636,69 & 2 762,82 & 12 762,82 \\ \hline
+            \end{tabular}
+        \end{center}
+
+    \subsection{Obrestna mera}
+        \subsubsection{Relativna obrestna mera}
+        Če je v enem letu več kapitalizacijskih obdobji, nam pa je podana letna obrestna 
+        mera si lahko s formulo \eqref{rom} izračunamo obrestno mero, ki se dejansko 
+        uporabi za izračun obresti na koncu vsakega kapitalizacijskega obdobja.
+
+        \begin{equation}
+            p(k) = \frac{p(letna)}{k}
+            \label{rom}
+        \end{equation}
+
+        Formula za obrestovalni faktor je:
+        \begin{equation}
+            \begin{split}
+                r & = 1 + \frac{p(k)}{100} \\
+                r & = 1 + \frac{\frac{p(letna)}{k}}{100} \\
+                r & = 1 + \frac{p(letna)}{k \cdot 100}
+            \end{split}
+        \end{equation}
+
+        s tem pa je enačba za izračun glavnice po $k$ kapitalizacijskih obdobjih 
+        ($k = k(letno) \cdot n$):
+        \begin{equation}
+            \begin{split}
+                G_n & = G_0 \cdot r^k \\
+                G_n & = G_0 \cdot (1 + \frac{p(na \: kapitalizacijsko \: obdobje)}{100 \cdot k})^k
+            \end{split}
+        \end{equation}
+
+        \quad \\
+        \quad \\
+
+        \begin{longtable}{|c|c|c|S|S|}
+            \hline
+            \textbf{leto} & \textbf{četrtletje} & \textbf{$k$} & \textbf{letno} & \textbf{četrtletno} \\ \hline
+            \endfirsthead
+            \endhead
+            0 & 0  & 0   & 10000.00 & 10000.00 \\ \hline \hline
+            1 & 1  & 1   & 10000.00 & 10125.00 \\ \hline
+              & 2  & 2   & 10000.00 & 10251.56 \\ \hline
+              & 3  & 3   & 10000.00 & 10379.71 \\ \hline
+              & 4  & 4   & 10500.00 & 10509.45 \\ \hline \hline
+            2 & 1  & 5   & 10500.00 & 10640.82 \\ \hline 
+              & 2  & 6   & 10500.00 & 10773.83 \\ \hline
+              & 3  & 7   & 10500.00 & 10908.50 \\ \hline
+              & 4  & 8   & 11025.00 & 11044.86 \\ \hline \hline
+            3 & 1  & 9   & 11025.00 & 11182.92 \\ \hline 
+              & 2  & 10  & 11025.00 & 11322.71 \\ \hline
+              & 3  & 11  & 11025.00 & 11464.24 \\ \hline
+              & 4  & 12  & 11576.25 & 11607.55 \\ \hline \hline
+            4 & 1  & 13  & 11576.25 & 11752.64 \\ \hline 
+              & 2  & 14  & 11576.25 & 11899.55 \\ \hline
+              & 3  & 15  & 11576.25 & 12048.29 \\ \hline
+              & 4  & 16  & 12155.06 & 12198.90 \\ \hline \hline
+            5 & 1  & 17  & 12155.06 & 12351.38 \\ \hline 
+              & 2  & 18  & 12155.06 & 12505.77 \\ \hline
+              & 3  & 19  & 12155.06 & 12662.10 \\ \hline
+              & 4  & 20  & 12762.82 & 12820.37 \\ \hline
+        \end{longtable}
+
+        Opazimo lahko, da smo z obrestovanjem na koncu vsakega četrtletja pridobili več obresti
+        kot pri obrestovanju letno. Od tod izvira tudi Eulerjevo število $e$, ki predstavlja
+        100 \% obrestno mero. Če imamo v enem letu neskončno kapitalizacijskih obdobji,
+        predstavlja število $e$ obrestovalni faktor, če bi obresti računali letno.
+        Izračunamo ga lahko po formuli: \hfill \cite{wiki:euler}
+        \begin{equation}
+            e = \lim_{k \to \infty} (1 + \frac{1}{k})^k
+        \end{equation}
+
+        \subsubsection{Konformna obrestna mera}
+        Uporaba 
 \section{Avtentični primer}
 
 
