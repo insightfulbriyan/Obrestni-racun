@@ -96,22 +96,15 @@ V tej seminarski nalogi bom predstavil obrestni rečun in njegove vrste ter prim
 \foreignlanguage{english}{This paper describes mathematics behind interest rates and their
 usecases.
 \\ %prazna vrstica
-\textbf{Keywords:} interest rate, annuity, amortization schedule}
+\textbf{Keywords:} (compound) interest rate, annuity, amortization schedule}
 \vfill
 
 % KAZALO 
 \newpage
 \thispagestyle{empty} % ne številčimo strani
 \tableofcontents % kazalo
-
-% \begingroup     % kazalo slik
-% \makeatletter
-% \section*{Slike}
-% \@starttoc{lof}
-% \let\clearpage\relax
-% \makeatother
-% \endgroup
-
+% \listoffigures % kazalo slik
+\listoftables    % kazalo tabel
 
 \newpage
 \section{Uvod}
@@ -131,7 +124,7 @@ modernejšega sveta.
                 $G_0$ & glavnica                & EUR    & denarna vrednost, ki si jo od nekoga izposodimo ali jo mi posodimo nekomu \\ \hline 
                 $o$   & obresti                 & EUR    & nadomestilo ali odškodnina za izposojeni denar, ker le-ta v času obrestovanja ni na voljo lastniku \\ \hline
                 $p$   & obrestna mera           & \%     & obresti podane v odstodkih navadno \textbf{letna obrestna mera} \\ \hline
-                $p_k$ & konformna obrestna mera & \%     & obrestna mera, ki se uporablja za izračun obresti \\ \hline
+                $p_k$ & konformna obrestna mera & \%     & obrestna mera, ki se uporablja za izračun obresti v posebnih primerih \ref{konformna} \\ \hline
                 $r$   & obrestovalni faktor     &        & $$r = 1 + \frac{p}{100}$$ \\ \hline
                 $r_k$ & konformni obrestovalni faktor &  & $$r_k = 1 + \frac{p_k}{100}$$ \\ \hline
                 $k$   & število kapitalizacijskih odbobji &  & kolikokrat smo izračunali obresti \\ \hline
@@ -146,9 +139,9 @@ modernejšega sveta.
 
         \subsubsection{Prikazovanje podatkov v tabelah in izračunih}
         Zaradi preprostosti prikazavanja so v tabeli vrednosti zaokrožene na cente natačno
-        in prikazane v EUR. V izračunih se uporablja dejanska vrednost. Ničto leto označuje
-        polog denarja, prikazane vrednosti pa stanje ob koncu leta razen kjer je navedeno 
-        drugače. 
+        in prikazane v EUR. Številčne vrdnosti so zaokrožene na 3 od 0 različna decimalna 
+        mesta. V izračunih se uporablja dejanska vrednost. Ničto leto označuje polog denarja,
+        prikazane vrednosti pa stanje ob koncu leta razen kjer je navedeno drugače. 
     \subsection{Obrestovanje}
         \subsubsection{Navadno obrestovanje}
         Navadno obrestovanje je način obrestovanja, kjer so obresti odvisne le od glavnice
@@ -160,17 +153,20 @@ modernejšega sveta.
 
         Vzemimo primer, kjer na banko položimo 10 000 € za 5 let pri 5\% letni obrestni meri. 
         \begin{center}
-            
-            \begin{tabular}{|c|c|}
-                \hline
-                \textbf{leto} & \textbf{vrednost [EUR]} \\ \hline
-                0 & 10 000,00 \\ \hline
-                1 & 10 500,00 \\ \hline
-                2 & 11 000,00 \\ \hline
-                3 & 11 500,00 \\ \hline
-                4 & 12 000,00 \\ \hline
-                5 & 12 500,00 \\ \hline
-            \end{tabular}
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{|c|c|}
+                    \hline
+                    \textbf{leto} & \textbf{vrednost [EUR]} \\ \hline
+                    0 & 10 000,00 \\ \hline
+                    1 & 10 500,00 \\ \hline
+                    2 & 11 000,00 \\ \hline
+                    3 & 11 500,00 \\ \hline
+                    4 & 12 000,00 \\ \hline
+                    5 & 12 500,00 \\ \hline
+                \end{tabular}
+                \caption{Navadno obrestovanje}
+            \end{table}
         \end{center}
 
         \subsubsection{Obrestno obrestovanje}
@@ -192,19 +188,23 @@ modernejšega sveta.
             G_n = G_0 \cdot (1 + \frac{p}{100})^n
         \end{equation}
 
-
+        \newpage
         Za primer vzemimo enake podatke kot pri navadnem obrestovanju.
         \begin{center}
-            \begin{tabular}{|c|S|S|S|}
-                \hline
-                \textbf{leto} & \textbf{letne obresti [EUR]} & \textbf{skupne obresti [EUR]} & \textbf{vrednost [EUR]} \\ \hline
-                0 & 0,00 & 0,00 & 10 000,00 \\ \hline
-                1 & 500,00 & 500,00 & 10 500,00 \\ \hline
-                2 & 525,00 & 1 025,00 & 11 025,00 \\ \hline
-                3 & 551,25 & 1 576,25 & 11 576,25 \\ \hline
-                4 & 578,81 & 2 155,06 & 12 155,06 \\ \hline
-                5 & 636,69 & 2 762,82 & 12 762,82 \\ \hline
-            \end{tabular}
+            \begin{table}[h!]
+                \centering
+                \begin{tabular}{|c|S|S|S|}
+                    \hline
+                    \textbf{leto} & \textbf{letne obresti [EUR]} & \textbf{skupne obresti [EUR]} & \textbf{vrednost [EUR]} \\ \hline
+                    0 & N/A & N/A & 10 000,00 \\ \hline
+                    1 & 500,00 & 500,00 & 10 500,00 \\ \hline
+                    2 & 525,00 & 1 025,00 & 11 025,00 \\ \hline
+                    3 & 551,25 & 1 576,25 & 11 576,25 \\ \hline
+                    4 & 578,81 & 2 155,06 & 12 155,06 \\ \hline
+                    5 & 636,69 & 2 762,82 & 12 762,82 \\ \hline
+                \end{tabular}
+                \caption{Obrestno obrestovanje}
+            \end{table}
         \end{center}
 
     \subsection{Obrestna mera}
@@ -236,12 +236,10 @@ modernejšega sveta.
             \end{split}
         \end{equation}
 
-        \quad \\
-        \quad \\
 
         \begin{longtable}{|c|c|c|S|S|}
             \hline
-            \textbf{leto} & \textbf{četrtletje} & \textbf{$k$} & \textbf{letno} & \textbf{četrtletno} \\ \hline
+            \textbf{leto} & \textbf{četrtletje} & \textbf{$k$} & \textbf{letno [EUR]} & \textbf{četrtletno [EUR]} \\ \hline
             \endfirsthead
             \endhead
             0 & 0  & 0   & 10000.00 & 10000.00 \\ \hline \hline
@@ -265,20 +263,135 @@ modernejšega sveta.
               & 2  & 18  & 12155.06 & 12505.77 \\ \hline
               & 3  & 19  & 12155.06 & 12662.10 \\ \hline
               & 4  & 20  & 12762.82 & 12820.37 \\ \hline
+            \caption{Četrtletno obrestno obrestovanje}
         \end{longtable}
 
         Opazimo lahko, da smo z obrestovanjem na koncu vsakega četrtletja pridobili več obresti
         kot pri obrestovanju letno. Od tod izvira tudi Eulerjevo število $e$, ki predstavlja
         100 \% obrestno mero. Če imamo v enem letu neskončno kapitalizacijskih obdobji,
-        predstavlja število $e$ obrestovalni faktor, če bi obresti računali letno.
+        predstavlja število $e$ obrestovalni faktor, če bi ekvivalentne obresti računali letno.
         Izračunamo ga lahko po formuli: \hfill \cite{wiki:euler}
         \begin{equation}
             e = \lim_{k \to \infty} (1 + \frac{1}{k})^k
         \end{equation}
 
         \subsubsection{Konformna obrestna mera}
-        Uporaba 
+        \label{konformna}
+        Konformna obrestna mera je obrestna mera, ki se uporablja za izračun obresti, ko
+        banka letno obrestno mero preračuna na več kapitalizacijskih obdobji letno tako, da
+        je skupna vrednost obresti enaka kot če bi obrestovali letno.
+        
+        \begin{equation}
+            \begin{split}
+                G_n = G_0 \cdot r & = G_0 \cdot r_k^k \\
+                r & = r_k^k \\
+                r_k & = \sqrt[k]{r} \\
+                1 + \frac{p_k}{100} & = \sqrt[k]{1 + \frac{p}{100}} \\
+                p_k & = 100 \cdot (\sqrt[k]{1 + \frac{p}{100}} - 1)
+            \end{split}
+        \end{equation}
+
+        Konformni obrestovalni faktor:
+        \begin{equation}
+            \begin{split}
+                r_k & = 1 + \frac{p_k}{100} \\
+                r_k & = 1 + \frac{100 \cdot (\sqrt[k]{1 + \frac{p}{100}} - 1)}{100} \\
+                r_k & = \sqrt[k]{1 + \frac{p}{100}}
+            \end{split}
+        \end{equation}
+
+        Ob prejšnjem primeru vzemimo, da nam banka izračuna obresti na vsako četrtletje,
+        vendar pri tem uporabijo konformno obrestno mero.
+
+        Izračun konformne obrestne mere:
+        \begin{equation}
+            \begin{split}
+                p_k & = 100 \cdot (\sqrt[k]{1 + \frac{p}{100}} - 1) \\
+                p_k & = 100 \cdot (\sqrt[4]{1 + \frac{5}{100}} - 1) \\
+                p_k & \approx 1.22
+            \end{split}
+        \end{equation}
+
+        in izračun konformnega obrestovalnega faktorja:
+        \begin{equation}
+            \begin{split}
+                r_k & = \sqrt[k]{1 + \frac{p}{100}} \\
+                r_k & = \sqrt[4]{1 + \frac{5}{100}} \\
+                r_k & \approx 1.01
+            \end{split}
+        \end{equation}
+
+        \begin{longtable}{|c|c|c|S|S|}
+            \hline
+            \textbf{leto} & \textbf{četrtletje} & \textbf{k} & \textbf{letno [EUR]} & \textbf{četrtletno [EUR]} \\ \hline
+            \endfirsthead
+            %
+            \endhead
+            %
+            0 & 0 & 0  & 10000.00  & 10000.00  \\ \hline \hline
+            1 & 1 & 1  & 10500.00  & 10122.72  \\ \hline
+              & 2 & 2  & 10500.00  & 10246.95  \\ \hline
+              & 3 & 3  & 10500.00  & 10372.70  \\ \hline
+              & 4 & 4  & 10500.00  & 10500.00  \\ \hline \hline
+            2 & 1 & 5  & 11025.00  & 10628.86  \\ \hline
+              & 2 & 6  & 11025.00  & 10759.30  \\ \hline
+              & 3 & 7  & 11025.00  & 10891.34  \\ \hline
+              & 4 & 8  & 11025.00  & 11025.00  \\ \hline \hline
+            3 & 1 & 9  & 11576.25  & 11160.30  \\ \hline
+              & 2 & 10 & 11576.25  & 11297.26  \\ \hline
+              & 3 & 11 & 11576.25  & 11435.91  \\ \hline
+              & 4 & 12 & 11576.25  & 11576.25  \\ \hline \hline
+            4 & 1 & 13 & 12155.06  & 11718.32  \\ \hline
+              & 2 & 14 & 12155.06  & 11862.13  \\ \hline
+              & 3 & 15 & 12155.06  & 12007.70  \\ \hline
+              & 4 & 16 & 12155.06  & 12155.06  \\ \hline \hline
+            5 & 1 & 17 & 12762.82  & 12304.23  \\ \hline
+              & 2 & 18 & 12762.82  & 12455.23  \\ \hline
+              & 3 & 19 & 12762.82  & 12608.09  \\ \hline
+              & 4 & 20 & 12762.82  & 12762.82  \\ \hline
+              \caption{Četrtletno obrestno obrestovanje s konformno obrestno mero}
+        \end{longtable}
+        % tuki dodej grafe če boš meu cajt
+
+    \subsection{Krediti}
+    Do sedaj smo obravnavali le obrestovanje na depozite, kjer smo mi banki posodili denar.
+    Krediti so v osnovi precej podobni, le da sta vlogi obrnjenji, saj banka nam posodi
+    denar, mi pa ga moramo z obrestmi vrniti.
+
+    Ko pri banki zaprosimo za kredit, nam ponavadi pošljejo amportizacijski načrt, ki nam
+    pove koliko moramo plačati vsak mesec in koliko denarja bomo plačali skupaj. Navadno
+    vsebuje podatke o mesečnem obroku (anuiteti), obrestih, razdolžnini in 
+    stanju dolga. 
+    $$\text{ANUITETA} = \text{OBRESTI} + \text{RAZDOLŽNINA}$$
+    Privzemimo, da smo si na banki izposodili D denarja. Z banko se dogovorimo, da bomo
+    kredit vrnili z n letnimi anuitetami, kjer prvo anuiteto vrnemo čez eno leto. Kolikšna
+    je anuiteta, če banka uporablja letno kapitalizacijo in p letno obrestno mero?
+    ($r = \sqrt[12]{1 + \frac{p}{100}}$)
+
+    \begin{equation}
+        \begin{split}
+            G_n \cdot r^n = G_0 \cdot r^{n - 1} + G_0 \cdot r^{n - 2} + \cdots + G_0 \cdot r + G_0
+        \end{split}
+    \end{equation}
+
+    Za primer vzemimo kredit v višini 150 000 € za 20 let pri 4\% letni obrestni meri.
+
 \section{Avtentični primer}
+    
+
+
+
+\section{Ugotovitve}
+\begin{itemize}
+    \item \quad
+    \item \quad
+    \item \LaTeX je čudovito orodje, ki močno poenostavi pisanje tokumentov z matematičnimi
+    izrazi. Če želiš uporabljati git (orodje za nadzor inaičic) se bolje obnese kot Word,
+    ker je .docx v bistvu binarna datoteka standard pa ni javno objavljen.
+\end{itemize}
+
+\newpage
+\section{Zaključek}
 
 
 
