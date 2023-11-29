@@ -103,7 +103,7 @@ usecases.
 \newpage
 \thispagestyle{empty} % ne številčimo strani
 \tableofcontents % kazalo
-% \listoffigures % kazalo slik
+\listoffigures   % kazalo slik
 \listoftables    % kazalo tabel
 
 \newpage
@@ -266,14 +266,16 @@ modernejšega sveta.
             \caption{Četrtletno obrestno obrestovanje}
         \end{longtable}
 
-        Opazimo lahko, da smo z obrestovanjem na koncu vsakega četrtletja pridobili več obresti
-        kot pri obrestovanju letno. Od tod izvira tudi Eulerjevo število $e$, ki predstavlja
-        100 \% obrestno mero. Če imamo v enem letu neskončno kapitalizacijskih obdobji,
-        predstavlja število $e$ obrestovalni faktor, če bi ekvivalentne obresti računali letno.
-        Izračunamo ga lahko po formuli: \hfill \cite{wiki:euler}
-        \begin{equation}
-            e = \lim_{k \to \infty} (1 + \frac{1}{k})^k
-        \end{equation}
+        \paragraph{Eulerjevo število}
+            \label{euler}
+            Opazimo lahko, da smo z obrestovanjem na koncu vsakega četrtletja pridobili več obresti
+            kot pri obrestovanju letno. Od tod izvira tudi Eulerjevo število $e$, ki predstavlja
+            100 \% obrestno mero. Če imamo v enem letu neskončno kapitalizacijskih obdobji,
+            predstavlja število $e$ obrestovalni faktor, če bi ekvivalentne obresti računali letno.
+            Izračunamo ga lahko po formuli: \hfill \cite{wiki:euler}
+            \begin{equation}
+                e = \lim_{k \to \infty} (1 + \frac{1}{k})^k
+            \end{equation}
 
         \subsubsection{Konformna obrestna mera}
         \label{konformna}
@@ -419,8 +421,8 @@ modernejšega sveta.
         17     & 11 037,26  & 1 602,56  & 9 434,70   & 30 629,41  \\ \hline
         18     & 11 037,26  & 1 225,18  & 9 812,09   & 20 817,32  \\ \hline
         19     & 11 037,26  & 832,69    & 10 204,57  & 10 612,75  \\ \hline
-        20     & 11 037,26  & 424,51    & 10 612,75  & 0,00      \\ \hline \hline
-        SKUPAJ & 220 745,25 & 70 745,25 & 150 000,00 &           \\ \hline
+        20     & 11 037,26  & 424,51    & 10 612,75  & 0,00       \\ \hline \hline
+        SKUPAJ & 220 745,25 & 70 745,25 & 150 000,00 &            \\ \hline
         \caption{Amortizacijski načrt}
     \end{longtable}
 
@@ -429,18 +431,45 @@ modernejšega sveta.
 
     To je sicer odvisno od banke, vendar se pogosto splača kredit odplačevati predčasno, saj
     se po plačanih obresith ves znesek prišteje razolžnini. 
+    \newpage
+
 \section{Avtentični primer}
-    
+    Na Delavsko hranilnico, d. d. sem želel položiti 10 000 € za 20 let (dolgoročno varčevanje).
+    Ponujena letna obrestna mera je 2,7 \%. \\
 
+    \begin{figure}[h!]
+        \includegraphics[width=\textwidth]{slike/2023-11-28_18-36.png}
+        \caption{Ponudba Delavske hranilnice, d. d.; vir: \cite{DH}}
+    \end{figure}
 
+    Opazimo lahko, da nam ponujajo obrestno obrestovanje. Preverimo če naše enačbe res držjo.
 
-\section{Ugotovitve}
+    \begin{equation}
+        \begin{split}
+            G_n & = G_0 \cdot (1 + \frac{p}{100})^n \\
+            G_n & = 10 \enskip 000 \text{ €} \cdot (1 + \frac{2,7}{100})^{20} \\
+            G_n & = 10 \enskip 000 \text{ €} \cdot 1,027^{20} \\
+            G_n & = 10 \enskip 000 \text{ €} \cdot 1,70 \\
+            G_n & \approx 17 \enskip 037,62 \text{ €}
+        \end{split}
+    \end{equation}
+
+    Vidimo, da pri izračunu pride do manjše napake (0,19 €) verjetno zaradi zaokroževanja,
+    saj nam banka obresti izračuna vsako leto, pri tem pa necele vrednosti zaokroži.
+
+    \newpage
+
+    \section{Ugotovitve}
 \begin{itemize}
-    \item \quad
-    \item \quad
+    \item Obrestno obrestovanje se nam bolj splača kot navadno obrestovanje. Prav tako nam
+    krajša kapitalizacijska doba prinese več dobička. V poglavju \ref{euler} smo spoznali
+    da je ob dani obrestni meri izkupiček največji pri neskončno kratki kapitalizacijsk dobi.
+    \item Ob avtentičnem primeru smo videli, da nam tudi banka občasno "po nesreči" doda
+    manjšo količino denarja. To se verjetno zgodi le ob napakah zaokroževanja, ki pa se lahko 
+    pri obrestnem obrestovanju hitro naberejo.
     \item \LaTeX je čudovito orodje, ki močno poenostavi pisanje tokumentov z matematičnimi
-    izrazi. Če želiš uporabljati git (orodje za nadzor inaičic) se bolje obnese kot Word,
-    ker je .docx v bistvu binarna datoteka standard pa ni javno objavljen.
+    izrazi. Če želiš uporabljati git (orodje za nadzor inaičic) se (\LaTeX) bolje obnese kot Word,
+    ker je .docx v bistvu binarna datoteka, standard pa ni javno objavljen.
 \end{itemize}
 
 \newpage
