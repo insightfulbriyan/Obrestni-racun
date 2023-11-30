@@ -109,7 +109,7 @@ usecases.
 \newpage
 \section{Uvod}
 Že od nekdaj so ljudje med seboj trgovali. Včasih so med sabo menjali dobrine (naturalno 
-gospodarstvo), ko pa so okoli leta 3000 pr. n. št. v Mezopotamiji \cite{wiki:money} pričeli
+gospodarstvo), okoli leta 3000 pr. n. št. pa so v Mezopotamiji \cite{wiki:money} pričeli
 z menjavo izdelkov za denar. Izumu denarja so botrovale tudi banke. Posojanje denarja v 
 zameno za več denarja se sprva zdi precej nenavadno, vendar pa je to le ena izmed storitev
 modernejšega sveta. 
@@ -171,7 +171,7 @@ modernejšega sveta.
 
         \subsubsection{Obrestno obrestovanje}
         Obrestno obrestovanje je način obrestovanja, kjer so obresti odvisne tako od 
-        glavnice, obrestne mere in prejšnjih obresti. Vsota glavnice in obresti torej 
+        glavnice, obrestne mere kot tudi prejšnjih obresti. Vsota glavnice in obresti torej 
         postne glavnica za naslednje kapitalizacijsko obdobje. Končna vrednost glavnice 
         po $n$ letih se izračuna po formuli:
         \begin{equation}
@@ -269,10 +269,10 @@ modernejšega sveta.
         \paragraph{Eulerjevo število}
             \label{euler}
             Opazimo lahko, da smo z obrestovanjem na koncu vsakega četrtletja pridobili več obresti
-            kot pri obrestovanju letno. Od tod izvira tudi Eulerjevo število $e$, ki predstavlja
-            100 \% obrestno mero. Če imamo v enem letu neskončno kapitalizacijskih obdobji,
-            predstavlja število $e$ obrestovalni faktor, če bi ekvivalentne obresti računali letno.
-            Izračunamo ga lahko po formuli: \hfill \cite{wiki:euler}
+            kot pri obrestovanju letno. Od tod izvira tudi Eulerjevo število $e$. Če nam 
+            banka ponuja 100 \% obrestno mero in imamo v enem letu neskončno kapitalizacijskih 
+            obdobji, predstavlja število $e$ obrestovalni faktor, če bi ekvivalentne obresti 
+            računali letno (\ref{konformna}). Izračunamo ga lahko po formuli: \hfill \cite{wiki:euler}
             \begin{equation}
                 e = \lim_{k \to \infty} (1 + \frac{1}{k})^k
             \end{equation}
@@ -331,25 +331,25 @@ modernejšega sveta.
             \endhead
             %
             0 & 0 & 0  & 10000,00  & 10000,00  \\ \hline \hline
-            1 & 1 & 1  & 10500,00  & 10122,72  \\ \hline
-              & 2 & 2  & 10500,00  & 10246,95  \\ \hline
-              & 3 & 3  & 10500,00  & 10372,70  \\ \hline
+            1 & 1 & 1  & 10000,00  & 10122,72  \\ \hline
+              & 2 & 2  & 10000,00  & 10246,95  \\ \hline
+              & 3 & 3  & 10000,00  & 10372,70  \\ \hline
               & 4 & 4  & 10500,00  & 10500,00  \\ \hline \hline
-            2 & 1 & 5  & 11025,00  & 10628,86  \\ \hline
-              & 2 & 6  & 11025,00  & 10759,30  \\ \hline
-              & 3 & 7  & 11025,00  & 10891,34  \\ \hline
+            2 & 1 & 5  & 10500,00  & 10628,86  \\ \hline
+              & 2 & 6  & 10500,00  & 10759,30  \\ \hline
+              & 3 & 7  & 10500,00  & 10891,34  \\ \hline
               & 4 & 8  & 11025,00  & 11025,00  \\ \hline \hline
-            3 & 1 & 9  & 11576,25  & 11160,30  \\ \hline
-              & 2 & 10 & 11576,25  & 11297,26  \\ \hline
-              & 3 & 11 & 11576,25  & 11435,91  \\ \hline
+            3 & 1 & 9  & 11025,00  & 11160,30  \\ \hline
+              & 2 & 10 & 11025,00  & 11297,26  \\ \hline
+              & 3 & 11 & 11025,00  & 11435,91  \\ \hline
               & 4 & 12 & 11576,25  & 11576,25  \\ \hline \hline
-            4 & 1 & 13 & 12155,06  & 11718,32  \\ \hline
-              & 2 & 14 & 12155,06  & 11862,13  \\ \hline
-              & 3 & 15 & 12155,06  & 12007,70  \\ \hline
+            4 & 1 & 13 & 11576,25  & 11718,32  \\ \hline
+              & 2 & 14 & 11576,25  & 11862,13  \\ \hline
+              & 3 & 15 & 11576,25  & 12007,70  \\ \hline
               & 4 & 16 & 12155,06  & 12155,06  \\ \hline \hline
-            5 & 1 & 17 & 12762,82  & 12304,23  \\ \hline
-              & 2 & 18 & 12762,82  & 12455,23  \\ \hline
-              & 3 & 19 & 12762,82  & 12608,09  \\ \hline
+            5 & 1 & 17 & 12155,06  & 12304,23  \\ \hline
+              & 2 & 18 & 12155,06  & 12455,23  \\ \hline
+              & 3 & 19 & 12155,06  & 12608,09  \\ \hline
               & 4 & 20 & 12762,82  & 12762,82  \\ \hline
               \caption{Četrtletno obrestno obrestovanje s konformno obrestno mero}
         \end{longtable}
@@ -362,8 +362,8 @@ modernejšega sveta.
 
     Ko pri banki zaprosimo za kredit, nam ponavadi pošljejo amortizacijski načrt, ki nam
     pove koliko moramo plačati vsak mesec in koliko denarja bomo plačali skupaj. Navadno
-    vsebuje podatke o mesečnem obroku (anuiteti), obrestih, razdolžnini in 
-    stanju dolga. 
+    vsebuje podatke o mesečnem obroku (anuiteti), obrestih, razdolžnini (delež dolga, ki 
+    ga odplačamo) in stanju dolga. 
     $$\text{ANUITETA} = \text{OBRESTI} + \text{RAZDOLŽNINA}$$
     Privzemimo, da smo si na banki izposodili $G_n$ denarja. Z banko se dogovorimo, da bomo
     kredit vrnili z $n$ letnimi anuitetami, kjer prvo anuiteto vrnemo čez eno leto. Banka
@@ -391,7 +391,7 @@ modernejšega sveta.
 
     Izračunali smo torej, da bomo naslednjih 20 let plačevali 11 037,26 € letno. Ker bomo
     banki vsako leto manj dolžni, bodo naše obresti manjše (kar si v tem primeru želimo)
-    hkrati pa bo večja razdolžnina (delež dolga, ki ga odplačamo). 
+    hkrati pa bo večja razdolžnina. 
     
     Izdelajmo amortizacijski načrt:
     \begin{longtable}{|c|c|c|c|c|}
@@ -454,7 +454,7 @@ modernejšega sveta.
         \end{split}
     \end{equation}
 
-    Vidimo, da pri izračunu pride do manjše napake (0,19 €) verjetno zaradi zaokroževanja,
+    Vidimo, da pri izračunu pride do manjše napake (2,19 €) verjetno zaradi zaokroževanja,
     saj nam banka obresti izračuna vsako leto, pri tem pa necele vrednosti zaokroži.
 
     \newpage
@@ -467,7 +467,7 @@ modernejšega sveta.
         \item Ob avtentičnem primeru smo videli, da nam tudi banka občasno "po nesreči" doda
         manjšo količino denarja. To se verjetno zgodi le ob napakah zaokroževanja, ki pa se lahko 
         pri obrestnem obrestovanju hitro naberejo.
-        \item \LaTeX je čudovito orodje, ki močno poenostavi pisanje tokumentov z matematičnimi
+        \item \LaTeX je čudovito orodje, ki močno poenostavi pisanje dokumentov z matematičnimi
         izrazi. Če želiš uporabljati git (orodje za nadzor inaičic) se (\LaTeX) bolje obnese kot Word,
         ker je .docx v bistvu binarna datoteka, standard pa ni javno objavljen.
     \end{itemize}
